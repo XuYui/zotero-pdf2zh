@@ -12,7 +12,7 @@ BabelDOC 0.6.2 already has a cross-page translation pass that batches the last b
 
 ## Patch
 
-The patch in [`patches/BabelDOC-0.6.2/0001-preserve-per-paragraph-scales.patch`](../patches/BabelDOC-0.6.2/0001-preserve-per-paragraph-scales.patch) targets the BabelDOC v0.6.2 source file `babeldoc/format/pdf/document_il/midend/typesetting.py`. It keeps each paragraph's precomputed scale instead of clamping every paragraph to a document-wide mode. The Zotero server uses the normal whole-document PDF2zh call, so BabelDOC's adjacent-page paragraph pass remains available.
+The patch in [`patches/BabelDOC-0.6.2/0001-preserve-per-paragraph-scales.patch`](../patches/BabelDOC-0.6.2/0001-preserve-per-paragraph-scales.patch) targets the [BabelDOC v0.6.2 source file](https://github.com/funstory-ai/BabelDOC/blob/v0.6.2/babeldoc/format/pdf/document_il/midend/typesetting.py). It keeps each paragraph's precomputed scale instead of clamping every paragraph to a document-wide mode. The Zotero server uses the normal whole-document PDF2zh call, so BabelDOC's adjacent-page paragraph pass remains available.
 
 This fork does not vendor BabelDOC or silently patch other users' environments. The patch is provided as a reproducible, version-specific experiment; it will need review and integration in the appropriate upstream source before it can become a general release fix.
 
@@ -26,4 +26,4 @@ The inspection verified page count and visual readability. It does not establish
 
 Accurate wording while this is still only a fork experiment:
 
-> Built and locally validated an AI-assisted patch for a PDF translation layout issue: preserved whole-document cross-page context while preventing a dense paragraph from shrinking unrelated text. Published a reproducible, version-pinned BabelDOC patch in a personal Zotero PDF2zh fork; upstream review/merge is pending and no PR has been submitted.
+> Built and locally validated an AI-assisted patch for a PDF translation layout issue: preserved whole-document cross-page context while preventing a dense paragraph from shrinking unrelated text. Published a reproducible, version-pinned BabelDOC patch in a personal Zotero PDF2zh fork; the change has not been submitted to the upstream project.
