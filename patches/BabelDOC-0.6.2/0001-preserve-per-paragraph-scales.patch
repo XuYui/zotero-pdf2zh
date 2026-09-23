@@ -1,0 +1,63 @@
+--- a/babeldoc/format/pdf/document_il/midend/typesetting.py
++++ b/babeldoc/format/pdf/document_il/midend/typesetting.py
+@@ -863,10 +863,9 @@
+         )
+ 
+     def preprocess_document(self, document: il_version_1.Document, pbar):
+         """预处理文档，获取每个段落的最优缩放因子，不执行实际排版"""
+-        all_scales: list[float] = []
+-        all_paragraphs: list[il_version_1.PdfParagraph] = []
++        has_paragraph = False
+ 
+         for page in document.page:
+             pbar.advance()
+             # 准备字体信息（复制自 render_page 的逻辑）
+@@ -889,16 +888,11 @@
+                             fonts[xobj.xobj_id][font.font_id] = font
+ 
+             # 处理每个段落
+             for paragraph in page.pdf_paragraph:
+-                all_paragraphs.append(paragraph)
+-                unit_count = 0
++                has_paragraph = True
+                 try:
+                     typesetting_units = self.create_typesetting_units(paragraph, fonts)
+-                    unit_count = len(typesetting_units)
+-                    for unit in typesetting_units:
+-                        if unit.formular:
+-                            unit_count += len(unit.formular.pdf_character) - 1
+ 
+                     # 如果所有单元都可以直接传递，则 scale = 1.0
+                     if all(unit.can_passthrough for unit in typesetting_units):
+                         paragraph.optimal_scale = 1.0
+@@ -912,29 +906,9 @@
+                     # 如果预处理出错，默认使用 1.0 缩放因子
+                     logger.warning(f"预处理段落时出错：{e}")
+                     paragraph.optimal_scale = 1.0
+ 
+-                if paragraph.optimal_scale is not None:
+-                    all_scales.extend([paragraph.optimal_scale] * unit_count)
+-
+-        # 获取缩放因子的众数
+-        if all_scales:
+-            try:
+-                modes = statistics.multimode(all_scales)
+-                mode_scale = min(modes)
+-            except statistics.StatisticsError:
+-                logger.warning(
+-                    "Could not find a mode for paragraph scales. Falling back to median."
+-                )
+-                mode_scale = statistics.median(all_scales)
+-            # 将所有大于众数的值修改为众数
+-            for paragraph in all_paragraphs:
+-                if (
+-                    paragraph.optimal_scale is not None
+-                    and paragraph.optimal_scale > mode_scale
+-                ):
+-                    paragraph.optimal_scale = mode_scale
+-        else:
++        if not has_paragraph:
+             logger.error(
+                 "document_scales is empty, there seems no paragraph in this PDF"
+             )
+ 

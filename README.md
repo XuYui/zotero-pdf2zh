@@ -17,6 +17,8 @@
 
 在 Zotero 中直接使用 [PDF2zh](https://github.com/Byaidu/PDFMathTranslate) 与 [PDF2zh_next](https://github.com/PDFMathTranslate/PDFMathTranslate-next) 翻译 PDF，保留公式与排版，并提供双语对照、裁剪阅读、批量翻译与多种 LLM 服务配置。
 
+> **个人 fork 记录：** [跨页上下文与排版修复实验](./docs/portfolio-cross-page-typesetting-fix.md)。此处记录的是针对本机 BabelDOC 0.6.2 的独立补丁与验证结果，尚未提交或合并到上游。
+
 **📚 项目文档：** [zotero-pdf2zh.github.io](https://zotero-pdf2zh.github.io)
 
 **📝 其他语言 / Other Languages:**
