@@ -21,7 +21,7 @@
 >
 > - **来源：** fork 自 [guaguastandup/zotero-pdf2zh](https://github.com/guaguastandup/zotero-pdf2zh)，基于上游 [commit `35af40f`](https://github.com/guaguastandup/zotero-pdf2zh/commit/35af40f5d206c1843e10bae000d9aaabf89096df)（README 标示版本 v4.1.7）。
 > - **本 fork 增补：** 针对 `pdf2zh_next` 所用 [BabelDOC 0.6.2](https://github.com/funstory-ai/BabelDOC/blob/v0.6.2/babeldoc/format/pdf/document_il/midend/typesetting.py) 的跨页上下文与字号缩放实验补丁，以及[问题分析和本地验证记录](./docs/portfolio-cross-page-typesetting-fix.md)。补丁文件：[查看](./patches/BabelDOC-0.6.2/0001-preserve-per-paragraph-scales.patch)。
-> - **范围：** 本 fork 增加的是 BabelDOC 补丁和说明，未修改 Zotero 插件界面或 DeepSeek API 接入代码；补丁尚未提交上游，也未作为新版安装包发布。
+> - **范围：** 本 fork 增加的是 BabelDOC 补丁和说明，未修改 Zotero 插件界面；补丁尚未提交上游，也未作为新版安装包发布。
 
 **📚 项目文档：** [zotero-pdf2zh.github.io](https://zotero-pdf2zh.github.io)
 
